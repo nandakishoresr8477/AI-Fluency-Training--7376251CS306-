@@ -4,8 +4,8 @@ My submissions for the AI Fluency Training conducted by the Training & Placement
 
 ## Structure
 
-- **Day1** — Chatbot vs rule-based workflow vs AI agent comparison (course fee scenario)
-- **Day1 Task** — Same comparison on a different scenario (library book fines), with output screenshots and a written analysis
+- **Day 1** — Chatbot vs rule-based workflow vs AI agent comparison (course fee scenario)
+- **TaskDay1** — Same comparison on a different scenario (library book fines), with output screenshots and a written analysis
 
 ## How to run
 
@@ -18,7 +18,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Add a `.env` file with your Groq API key before running any script.
+Add a `.env` file with your own Groq API key before running any script.
 
 ## Note
 
