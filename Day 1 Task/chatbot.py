@@ -1,11 +1,11 @@
-"""System 1: a plain LLM chatbot. No tools, no access to the college data."""
+"""System 1: a plain LLM chatbot. No tools, no access to the library data."""
 from config import client, MODEL, QUESTIONS, banner
 
 def chatbot(question):
     response = client.chat.completions.create(
         model=MODEL,
         messages=[
-            {"role": "system", "content": "You are a helpful college assistant."},
+            {"role": "system", "content": "You are a helpful library assistant."},
             {"role": "user", "content": question},
         ],
         temperature=0,

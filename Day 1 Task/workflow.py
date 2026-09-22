@@ -1,25 +1,25 @@
 """System 2: a rule-based workflow. Fixed if/else rules, no LLM at all."""
 import re
-from config import COURSE_FEES, QUESTIONS
+from config import BOOK_FINES, QUESTIONS
 
 def workflow(question):
-    codes = re.findall(r"[A-Z]{2}\d{3}", question.upper())
-    fees = [COURSE_FEES[code] for code in codes if code in COURSE_FEES]
+    codes = re.findall(r"[A-Z]\d{3}", question.upper())
+    fines = [BOOK_FINES[code] for code in codes if code in BOOK_FINES]
 
-    if not fees:
-        return "Sorry, I can only answer questions about course fees."
+    if not fines:
+        return "Sorry, I can only answer questions about book fines."
 
     text = question.lower()
 
     if "total" in text:
-        total = sum(fees)
-        percent = re.search(r"(\d+)\s*%", text)
-        if "scholarship" in text and percent:
-            total = total * (1 - int(percent.group(1)) / 100)
-        return f"Total fee: Rs. {total:,.0f}"
+        total = sum(fines)
+        days = re.search(r"(\d+)\s*days?", text)
+        if days:
+            total = total * int(days.group(1))
+        return f"Total fine: Rs. {total:,.0f}"
 
-    if len(fees) == 1:
-        return f"Fee for {codes[0]}: Rs. {fees[0]:,}"
+    if len(fines) == 1:
+        return f"Fine for {codes[0]}: Rs. {fines[0]:,}"
 
     return "Sorry, I do not have a rule for this type of question."
 

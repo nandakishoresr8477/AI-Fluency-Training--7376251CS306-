@@ -27,14 +27,14 @@ if not API_KEY:
 
 client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
 
-# Private college data that no public LLM has ever seen
-COURSE_FEES = {"CS101": 12000, "AI202": 18000, "DS303": 15000}
+# Private library data that no public LLM has ever seen
+BOOK_FINES = {"B101": 5, "B202": 10, "B303": 7}
 
 QUESTIONS = [
-    "What is the fee for AI202?",
-    "What is the total fee for CS101 and AI202 after a 10% scholarship?",
-    "Is DS303 more expensive than CS101, and by how much?",
-    "Write a two-line welcome message for new AI students.",
+    "What is the fine per day for B202?",
+    "What is the total fine for B101 and B202 kept 3 days late?",
+    "Is B303's fine higher than B101's, and by how much?",
+    "Write a two-line reminder message for students returning books late.",
 ]
 
 def banner(system_name):

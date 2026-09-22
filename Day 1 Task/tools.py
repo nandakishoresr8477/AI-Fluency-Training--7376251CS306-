@@ -1,12 +1,12 @@
 """Tools the agent is allowed to use, plus their JSON Schema descriptions."""
 import ast
 import operator
-from config import COURSE_FEES
+from config import BOOK_FINES
 
-def get_course_fee(course_code: str) -> str:
-    """Look up the fee for one course code."""
-    fee = COURSE_FEES.get(course_code.strip().upper())
-    return str(fee) if fee is not None else f"Unknown course code: {course_code}"
+def get_book_fine(book_code: str) -> str:
+    """Look up the fine for one book code."""
+    fine = BOOK_FINES.get(book_code.strip().upper())
+    return str(fine) if fine is not None else f"Unknown book code: {book_code}"
 
 # A safe calculator: only numbers and + - * / ( ) are allowed. Never use eval().
 _OPS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
@@ -28,16 +28,16 @@ def calculator(expression: str) -> str:
     except Exception as error:
         return f"Calculator error: {error}"
 
-TOOL_FUNCTIONS = {"get_course_fee": get_course_fee, "calculator": calculator}
+TOOL_FUNCTIONS = {"get_book_fine": get_book_fine, "calculator": calculator}
 
 # These descriptions are what the LLM reads when deciding which tool to call
 TOOLS = [
     {"type": "function", "function": {
-        "name": "get_course_fee",
-        "description": "Get the fee in rupees for a single course code, for example CS101.",
+        "name": "get_book_fine",
+        "description": "Get the daily fine in rupees for a single book code, for example B101.",
         "parameters": {"type": "object",
-                        "properties": {"course_code": {"type": "string"}},
-                        "required": ["course_code"]}}},
+                        "properties": {"book_code": {"type": "string"}},
+                        "required": ["book_code"]}}},
     {"type": "function", "function": {
         "name": "calculator",
         "description": "Evaluate an arithmetic expression using + - * / and brackets.",
@@ -47,6 +47,6 @@ TOOLS = [
 ]
 
 if __name__ == "__main__":
-    print("get_course_fee('ai202') ->", get_course_fee("ai202"))
-    print("calculator('(12000 + 18000) * 0.9') ->", calculator("(12000 + 18000) * 0.9"))
-    print("calculator('15000 - 12000') ->", calculator("15000 - 12000"))
+    print("get_book_fine('b202') ->", get_book_fine("b202"))
+    print("calculator('(5 + 10) * 3') ->", calculator("(5 + 10) * 3"))
+    print("calculator('7 - 5') ->", calculator("7 - 5"))
